@@ -12,9 +12,9 @@ The paper is written in LaTeX, with the source code in the file [`paper.tex`](ht
 ### Installation
 The implementation requires Node.js which may be downloaded and installed from the [Node.js website](https://nodejs.org/en/download/).
 
-Next, download or `git clone` this repository.
+To install the program, download or `git clone` this repository.
 
-Install the necessary dependencies by navigating to the project root directory and running the following command in the terminal
+Next, the necessary dependencies must be installed by navigating to the project root directory and running the following command in the terminal
 ```sh
 $ npm install
 ```
@@ -46,13 +46,24 @@ The program may be configured using the `config.json` file. The default config l
 The properties of the config object are
 * **schoolId** - `{number}` - The school id, found in the URL query string as `schoolid`
 * **schoolCode** - `{number}` - The school code, found in the URL query string as `code`
-* **classes** - `{[string]|'*'}` - The array of class names. If the string `'*'` instead is provided, all classes will be included
-* **weeks** - `{[number]|'*'}` - The array of weeks. The string `'*'` means all weeks
+* **classes** - `{[string]|"*"}` - The array of class names. If the string "'*"` instead is provided, all classes will be included
+* **weeks** - `{[number]|"*"}` - The array of weeks. The string `"*"` means all weeks
 * **requestTimeout** - `{number}` - Optional. The timeout between requests
 
-If no `schoolId` or `schoolCode` is provided, the program will use the ID and code of Värmdö Gymnasium.
+If no `schoolId` or `schoolCode` is provided, the program will use the id and code of Värmdö Gymnasium.
+
+For example the configuration to fetch all classes and weeks for the default school with no request timeout would be
+```json
+{
+	"classes": "*",
+	"weeks": "*",
+    "requestTimeout": 0
+}
+```
+
+
 ##### School IDs and codes
-The  school ids and codes of some schools (in no particular order or reason for selection) are presented in the table bewlow. The third column indicates whether or not the program has successfully parsed schedules from the school. A check provides no guarantee that the parsing process works. If the parsing process produces an error, adjustments may have to be made to the source code.
+The ids and codes of some schools and presented them in the table below. The schools are arbitrarily selected and in no particular order. The third column indicates whether or not the program has successfully parsed schedules from the school. A check mark provides no guarantee that the parsing process works, while a cross may not necessarily mean that it does not. If the program can not parse a particular schedule, adjustments may have to be made to the source code (you can learn about this in the paper).
 
 | School                    | schoolId | schoolCode | Tested |
 |---------------------------|----------|------------|:------:|
@@ -63,6 +74,16 @@ The  school ids and codes of some schools (in no particular order or reason for 
 | Norra Real                | 81530    | 123489     |    ✕   |
 | Katedralskolan i Uppsala  | 68600    | 12689      |    ✕   |
 | Thorildsplans gymnasium   | 80710    | 211677     |    ✕   |
+
+| School                    | schoolId | schoolCode | Successfully tested |
+|---------------------------|----------|------------|:-------------------:|
+| Värmdö Gymnasium          | 99810    | 945537     |          ✓          |
+| Östra Real                | 59150    | 522626     |          ✓          |
+| Tyresö Gymnasium          | 27820    | 519876     |          ✓          |
+| Sundsta-Älvkullegymnasiet | 18200    | 993161     |          ✓          |
+| Norra Real                | 81530    | 123489     |          ✕          |
+| Katedralskolan i Uppsala  | 68600    | 12689      |          ✕          |
+| Thorildsplans gymnasium   | 80710    | 211677     |          ✕          |
 
 ### Code
 The implementation is written in JavaScript for Node.js.
