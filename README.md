@@ -1,6 +1,6 @@
 # Novasoftware Schedule Parser
 
-This project hosts the paper and implementation code for my final High School Essay.
+This project hosts the paper and implementation code for my final High School Essay (Gymnasiearbete).
 
 ## Paper
 The files for the paper are contained in the `paper` directory, where the actual paper document may be found as [`paper.pdf`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/paper/paper.pdf).
