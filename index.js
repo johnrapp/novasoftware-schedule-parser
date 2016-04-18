@@ -47,7 +47,9 @@ function parseSchedules(weeks, classes) {
 	}),
 	function(err, weeks) {
 		if(err) { console.error(err); }
-		console.log(Date.now() - start);
+		var elapsed = (Date.now() - start) / 1000;
+		var rounded = Math.round(elapsed * 10) / 10;
+		console.log('Done, took', rounded, 's');
 	});
 }
 

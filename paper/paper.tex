@@ -842,15 +842,15 @@
 	\section{Summary}
 	%Kanske nämna något om teori-avsnittet
 	%Kanske koppla lite bättre till goals
-	The development of the process of extracting schedule information from the Novasoftware web application was presented, discussing problems encountered and how they were solved.
+	The development of the process of extracting schedule information from the Novasoftware web application has been presented, discussing encountered problems and how they were solved.
 	
-	Two major problems were to find an endpoint which information could be extracted from, as well as deciding the extraction process. This was solved by discovering the PDF image endpoint and then, through examining and experimenting with the obtained result, deriving a parsing method. The next major problem was retrieving the information that was missing from certain lessons. This was solved by finding the lesson detail page, determining the process to simulate the click as well as to extract information from the HTML result. Failing requests were managed by retrying them and performing all requests in sequence, with a timeout in between. Remarks about limitations of the described method were made, in some cases presenting methods of extension.
+	Two major problems which presented them selves during the development of the process were to find an endpoint from where information could be extracted, as well as deciding the extraction process. This was solved by discovering the PDF image endpoint and then, through examining and experimenting with the obtained results, deriving a parsing method. The next major problem was retrieving the information that was missing from certain lessons. This was solved by finding the lesson detail page and then determining the process to simulate the click as well as to extract information from the HTML result. Failing requests were managed by retrying them and performing all requests in sequence with a timeout in between. Remarks about limitations of the described method were made, in some cases presenting methods of extension.
 	
 	Instructions for implementation of the process was provided using text and code; first describing methods of retrieving required data via HTTP requests and subsequently documenting methods of extracting relevant information. The process may be implemented in any language and platform supporting the required technologies.
 	
 	\section{Discussion}
 	%Som någon som just ~streckläst paperet tycker jag inte instinktivt att det är repitativt. Det nämndes i början vet jag men minns inte något mer. I vilket fall som helst är det här det hör hemma som mest och borde inte tas bort.
-	The data obtained using this process may be used for many applications. One example is create a custom schedule viewer with the purpose of for example increasing the availability of the information or providing a mobile friendly experience.
+	The data obtained using this process may be used for many applications. One example is to create a custom schedule viewer with the purpose of for example increasing the availability of the information or providing a mobile friendly experience.
 
 	%Simme tycker det låter konstigt med "poses the question as of"
 	If the data is used for a schedule viewer, new problems will have to be solved. For example the decision of when to fetch and parse the schedules has to be made. Fetching and parsing a particular schedule every time it is requested may be both slow and resource intensive. Instead a caching system, performing the parsing only once for each schedule and saving the result, may be required. This further poses the question as of how many schedules should be kept in the cache as well as when they should be considered invalid, since the schedules change every term (and has been observed to sometimes even change during the term).
@@ -877,7 +877,7 @@
 	More information about the provided implementation, as well as more thorough instructions may be found in the GitHub readme at \url{https://github.com/johnrapp/novasoftware-schedule-parser#readme}.
 	
 	\subsection{Considerations}
-	If you plan to implement this method please consider that the Novasoftware may get overloaded if it is receiving too many concurrent requests. If you do this, your activity will be inseparable from a DOS (Denial of Service) attack, which may damage the servers or the business. This will also limit regular users ability to use the viewer as it may slow down or restrict the availability of the application. In order to minimize the risk of slowing down or damaging the servers, please consider not sending more than one concurrent request, preferably with a timeout between each request. This is of course included in the provided implementation. It is also considerate to perform the fetching during non peak hours, such as in the night.
+	Anyone who plans to implement this method should consider that the Novasoftware may get overloaded if it is receiving too many concurrent requests. If not considered, the users activity will be inseparable from a DOS (Denial of Service) attack, which might damage the servers or the business. This will also limit regular users ability to use the viewer as it may slow down or restrict the availability of the application. In order to minimize the risk of slowing down or damaging the servers, one should definitely consider not sending more than one concurrent request, preferably with a timeout between each request. This is of course included in the provided implementation. It is also considerate to perform the fetching during non peak hours, such as in the night.\todo{sluta på en annan note}
 	
 	\newpage
 	\begin{appendices}
@@ -986,8 +986,13 @@
 			
 	\newpage
 	\renewcommand{\bibpreamble}{
-		\textit{All sources were fetched on the date of publication of this paper. Because the information stated in the theory section (which is were the sources are referred from) of this paper is recognized as basic knowledge in the field, Wikipedia is considered a reliable source.}
+		\textit{All sources were reviewed at the date of publication of this paper. Because the information stated in the theory section of this paper (which is were the sources are referred from) is recognized as basic knowledge in the field, Wikipedia is considered a reliable source.}
 	}
+	\todo{
+		Behövs inte källor, Wikipedia är bara referens
+		typ av arete som inte gått ut på källforskning 	
+	}
+	
 	\begin{thebibliography}{9}
 		\bibitem{wikipedia web browser}
 		Web browser - Wikipedia\\\url{https://en.wikipedia.org/wiki/Web_browser}
