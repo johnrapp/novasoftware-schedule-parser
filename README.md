@@ -3,9 +3,9 @@
 This project hosts the paper and implementation code for my final High School Essay.
 
 ## Paper
-The files for the paper are contained in the `paper` directory, where the actual paper document may be found as `paper.pdf`.
+The files for the paper are contained in the `paper` directory, where the actual paper document may be found as [`paper.pdf`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/paper/paper.pdf).
 
-The paper is written in LaTeX, with the source code in the file  `paper.tex`.
+The paper is written in LaTeX, with the source code in the file [`paper.tex`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/paper/paper.tex).
 
 ## Implementation
 
@@ -67,9 +67,14 @@ The  school ids and codes of some schools (in no particular order or reason for 
 ### Code
 The implementation is written in JavaScript for Node.js.
 
-The main parsing logic is contained in `parse-lessons.js`.
+The main parsing logic is contained in [`parse-lessons.js`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/parse-lessons.js).
 
-`novasoftware.js` contains the HTTP requests.
+[`novasoftware.js`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/novasoftware.js) contains the HTTP requests.
+
+Adjustments can be made primarily to `parse-lessons.js` and `scrapeClickedLesson(body)` in `novasoftware.js`.
+
+### Demo
+The process described in the process and implemented in this project powers the schedule viewing application [vgy.rocks/schema](http://vgy.rocks/schema) for Värmdö Gymnasium. The repository for this application may be found [here](https://github.com/johnrapp/schedule-parser/).
 
 ## License
 GNU General Public License v3.0, see [LICENCE](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/LICENSE)
