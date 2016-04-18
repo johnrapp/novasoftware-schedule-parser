@@ -61,7 +61,6 @@ For example the configuration to fetch all classes and weeks for the default sch
 }
 ```
 
-
 ##### School IDs and codes
 The ids and codes of some schools are presented in the table below. The schools are arbitrarily selected and in no particular order. The fourth column indicates whether or not the program has successfully parsed schedules from the school. A check mark provides no guarantee that the parsing process works, while a cross may not necessarily mean that it does not. If the program can not parse a particular schedule, adjustments may have to be made to the source code (you can learn about this in the paper).
 
@@ -86,4 +85,4 @@ All the communication with the Novasoftware server is done through [`novasoftwar
 The same process described in the process and implemented in this project powers the schedule viewing application [vgy.rocks/schema](http://vgy.rocks/schema) for Värmdö Gymnasium. The repository for this application may be found [here](https://github.com/johnrapp/schedule-parser/).
 
 ## License
-GNU General Public License v3.0, see [LICENCE](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/LICENSE)
+GNU General Public License v3.0
