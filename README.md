@@ -63,17 +63,17 @@ For example the configuration to fetch all classes and weeks for the default sch
 
 
 ##### School IDs and codes
-The ids and codes of some schools are presented in the table below. The schools are arbitrarily selected and in no particular order. The third column indicates whether or not the program has successfully parsed schedules from the school. A check mark provides no guarantee that the parsing process works, while a cross may not necessarily mean that it does not. If the program can not parse a particular schedule, adjustments may have to be made to the source code (you can learn about this in the paper).
+The ids and codes of some schools are presented in the table below. The schools are arbitrarily selected and in no particular order. The fourth column indicates whether or not the program has successfully parsed schedules from the school. A check mark provides no guarantee that the parsing process works, while a cross may not necessarily mean that it does not. If the program can not parse a particular schedule, adjustments may have to be made to the source code (you can learn about this in the paper).
 
-| School                    | schoolId | schoolCode | Tested |
-|---------------------------|----------|------------|:------:|
-| Värmdö Gymnasium          | 99810    | 945537     |    ✓   |
-| Östra Real                | 59150    | 522626     |    ✓   |
-| Tyresö Gymnasium          | 27820    | 519876     |    ✓   |
-| Sundsta-Älvkullegymnasiet | 18200    | 993161     |    ✓   |
-| Norra Real                | 81530    | 123489     |    ✕   |
-| Katedralskolan i Uppsala  | 68600    | 12689      |    ✕   |
-| Thorildsplans gymnasium   | 80710    | 211677     |    ✕   |
+| School                    | schoolId | schoolCode | Success |
+|---------------------------|----------|------------|:-------:|
+| Värmdö Gymnasium          | 99810    | 945537     |    ✓    |
+| Östra Real                | 59150    | 522626     |    ✓    |
+| Tyresö Gymnasium          | 27820    | 519876     |    ✓    |
+| Sundsta-Älvkullegymnasiet | 18200    | 993161     |    ✓    |
+| Norra Real                | 81530    | 123489     |    ✕    |
+| Katedralskolan i Uppsala  | 68600    | 12689      |    ✕    |
+| Thorildsplans gymnasium   | 80710    | 211677     |    ✕    |
 
 ### Code
 The implementation is written in JavaScript for Node.js.
