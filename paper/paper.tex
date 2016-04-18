@@ -257,19 +257,19 @@
 	Another important feature of HTTP requests are that they can include cookies. Cookies are used by applications in order to save small amounts of data in the browser, and are sent back and forth in every request. This is often used to give the client an ID (Identifier) so that information about the client can persist between sessions even though HTTP is a stateless protocol.\cite{wikipedia cookie}
 	
 	\subsubsection{HTML}
-	Because the HTML obtained from the server response is a string, it must be transformed into a searchable and more practical structure. Often the document is described in a DOM (Document Object Model), providing a more programmer friendly interface. In order to reference certain locations or data points of the HTML documents, CSS (Cascading Style Sheets) selectors are used, because of their popularity within the web. The method used in this process, where HTML is retrieved and information is extracted from it in an automated program, is often referred to as web scraping.\cite{wikipedia css}\cite{wikipedia web scraping}
+	Because the HTML obtained from the server response is a string, it must be transformed into a searchable and more practical structure. Often the document is described in a DOM (Document Object Model), providing a more programmer friendly interface. In order to reference certain locations or data points of the HTML documents, CSS (Cascading Style Sheets) selectors are used, because of their popularity within the web. The method used in this process, which retrieves HTML and extracts information from it in an automated program, is often referred to as web scraping.\cite{wikipedia css}\cite{wikipedia web scraping}
 	
 	\subsubsection{JSON}
 	The output of the program is in the JSON (JavaScript Object Notation) format which is human readable and particularly useful for the web because of its similarity to JavasScript; the de facto scripting language on the web.\cite{wikipedia json}
 	
 	\subsubsection{PNG and PDF}
-	In the process, the PNG (Portable Network Graphics) and PDF (Portable Document Format) file formats are encountered. PNG is an image format, while a PDF is a document format. The relevant information about PDF documents are that they consist of pages, texts and fills (indicating parts of the document filled with color).\cite{wikipedia png}\cite{wikipedia pdf}
+	In the process, the PNG (Portable Network Graphics) and PDF (Portable Document Format) file formats are encountered. PNG is an image format, while a PDF is a document format. The information about PDF documents that is relevant to this paper is that they consist of pages, texts and fills (indicating parts of the document filled with color).\cite{wikipedia png}\cite{wikipedia pdf}
 	
 	\subsubsection{Regular expressions}
 	Regular expressions are used in multiple instances in the parsing process. A regular expression is a pattern designed to match (indicating if a string belongs to) a particular set of strings. The set is described using symbols, indicating different characters or operators.\cite{wikipedia regex}
 	
 	\subsection{Conventions}
-	Examples will be written in JavaScript. An ES5 (ECMAScript 5) or later environment is assumed. JavaScript code is syntax highlighted and look as such:
+	Examples will be written in JavaScript. An ES5 (ECMAScript 5) or later environment is assumed. JavaScript code is syntax highlighted as follows:
 	\begin{lstlisting}[language=JavaScript]
 	var string = 'Hello world!'; //This is a comment
 	console.log(string);
@@ -282,7 +282,7 @@
 	The brackets denote variable substitution. In the above expression, the value of the variable \texttt{name} is to be substituted after the slash. If for example the value of the \texttt{name} variable is the string "john", the resulting URL would be:\\
 	\url{http://www.example.com/path?author=john}
 	
-	HTTP request are displayed as such:
+	HTTP request are displayed as follows:
 	
 	\newpage
 	\begin{lstlisting}[language=HTTP, style=nonumbers]
@@ -307,14 +307,14 @@
 	Regular expressions will be written as such \regex{expression}, for example \regex{^\d} would match all strings starting with a digit. Regular expression features and behavior of ES5 or later is assumed.
 	
 	\subsection{Method}
-	The process has been derived via a series of experiments and attempts. The data and different HTTP endpoints have been discovered while attempting to reverse engineer the application by navigating and examining the different pages. Ways of reaching these using a non-browser client has been determined via trial and error.
+	The process has been derived via a series of experiments and attempts. The data and different HTTP endpoints have been discovered while attempting to reverse engineer the application by navigating and examining the different pages. Ways of reaching these using a non-browser client have been determined via trial and error.
 	
-	The parsing method was derived by first studying different schedules; examining how they were organized and how the information could be extracted. From these schedules certain conclusions about the structure of the data could be drawn and using these an algorithm was proposed. Once implemented, this algorithm was tested on multiple schedules and tweaked until all (detected) errors were eliminated. In some cases a solution originally proposed was discovered to be insufficient and a new solution was sought.
+	The parsing method was derived by first studying different schedules; examining how they were organized and how the information could be extracted. From these schedules certain conclusions about the structure of the data could be drawn; using these an algorithm was proposed. Once implemented, this algorithm was tested on multiple schedules and tweaked until all (detected) errors were eliminated. In some cases a solution originally proposed was discovered to be insufficient and a new solution was sought.
 	
 	The HTTP requests used in the process were found by imitating the web browser's request when using the Novasoftware application. These requests were accessed and viewed using the browser development tools. Because the requests often include redundant information, such as empty header or form data fields, only the relevant information was kept in order to make the requests as simple and elegant as possible. These were determined by the process of experimentation and elimination.
 	
 	\subsection{The Novasoftware application}
-	In order to explain and understand the process, knowledge of the Novasoftware application is required.
+	In order to explain and understand the process, a certain familiarity of the Novasoftware application is required.
 	
 	The application consists of the following relevant endpoints:
 	
@@ -385,7 +385,7 @@
 	By observing the schedules; the data fields and structure were determined. The schema is included in  appendix \ref{schedule format}. Each schedule is associated with a \texttt{className}, a \texttt{week} and a list of \texttt{days} as well as a list of \texttt{lessons}.
 	For each lesson there is a \texttt{startTime}, \texttt{endTime}, \texttt{day} and a \texttt{details} list.
 	
-	The details list items are composed of a \texttt{course}, \texttt{location} and a \texttt{teacher}. The details are in a list because it was observed that sometimes one lesson item on the schedule may include multiple lessons, as demonstrated below.
+	The details list items are composed of a \texttt{course}, a \texttt{location} and a \texttt{teacher}. The details are in a list because it was observed that sometimes one lesson item on the schedule may include multiple lessons, as demonstrated below.
 	
 	\begin{figure}[h]
 		\centering
@@ -394,7 +394,7 @@
 		\label{fig:multiple-lessons}
 	\end{figure}
 	
-	The \texttt{detail} list will contain only one entry in the most common case, where there is only one concurrent lesson. Otherwise it will contain one entry per lesson.
+	The \texttt{detail} list will typically contain only one entry, where there is only one concurrent lesson. Otherwise it will contain one entry per lesson.
 	
 	\section{Development}
 	
@@ -403,22 +403,22 @@
 	
 	\texttt{http://www.novasoftware.se/WebViewer/\hl{(S(310b0lvc2tbhmb451vdk4c2v))}\\/MZDesign1.aspx}
 	
-	Because the URL was originally copied from the browser, the ID was copied along with it and also used in the HTTP client. It was discovered that the URL ID varied between sessions when using the browser and the conclusion was made that the ID was invalidated after a certain amount of time. This lead to the problems with the HTTP client because an old and invalidated ID was used. To solve this, it proved useful to leave the ID out of the URL as such:
+	Because the URL was originally copied from the browser, the ID was copied along with it and also used in the HTTP client. It was discovered that the URL ID varied between sessions when using the browser and the conclusion was made that the ID was invalidated after a certain amount of time. This lead to the problems with the HTTP client: an old and invalidated ID was used. To solve this, it proved useful to leave the ID out of the URL as such:
 	
 	\url{http://www.novasoftware.se/WebViewer//MZDesign1.aspx}
 	
-	The server would return a redirect response with a new URL containing a valid ID that could be used in future requests. However performing POST requests to this new URL, essential to the process, would produce a 500 (Server Error) response instead of the requested resource. By examining the browser activity and through the process of experimentation, it was discovered that if a GET request was first sent to the URL, subsequent POST requests would yield the appropriate response. It was as if the ID had to be "activated" before it could be used.
+	The server would then return a redirect response with a new URL containing a valid ID that could be used in future requests. However, performing POST requests to this new URL -- essential to the process -- would produce a 500 (Server Error) response instead of the requested resource. By examining the browser activity and through the process of experimentation, it was discovered that if a GET request was first sent to the URL, subsequent POST requests would yield the appropriate response. It was as if the ID had to be "activated" before it could be used.
 	
 	\subsection{Parsing the schedule}
-	Next a method of parsing the schedule was sought. The originally discovered representation of the schedule, a PNG-image, was impractical for parsing because images are notoriously hard to decode and extract information from. Instead a different format was desired, which lead to the vital discovery of the PDF version; a format much better suited for information extraction. Because the raw PDF format is hard to read, a parser was sought. JSON was determined to be a appropriate and a PDF to JSON parsing library was found. The next step was extracting the schedule information from this JSON result.
+	Next a method of parsing the schedule was sought. The originally discovered representation of the schedule, a PNG-image, was impractical for parsing because images are notoriously hard to decode and extract information from. A different format was sought in its place, which lead to the critical discovery of the PDF version, a format much better suited for information extraction. Because the raw PDF format is hard to read, a parser was required. JSON was determined to be appropriate and a PDF to JSON parsing library was found. The next step was to extract the schedule information from this JSON result.
 	
 	\subsection{Extracting schedule information}
 	The structure of the parsed result is included in appendix \ref{parsed pdf}.
 	
-	By studying the result the conclusion was made that the \texttt{Fills} corresponded to lessons and the \texttt{Texts} to lesson information as well as start and end times. The days of the lesson fills and texts could be determined by their x-coordinates. The problem was determining which lesson fill corresponded to which texts.
+	By examining the result the conclusion was made that the \texttt{Fills} corresponded to lessons and the \texttt{Texts} to lesson information as well as to start and end times. The days of the lesson fills and texts could be determined by their x-coordinates. The problem was determining which lesson fill corresponded to which texts.
 	\newpage
 	\subsection{Associating lesson fills with lesson texts}
-	The first approach proposed for reading the schedule was to do so in a linear fashion; one lesson at a time from top to bottom. The problem with this method was that multiple concurrent lessons was very common. This was especially prevalent in some particular schedules, such as the one below:
+	The first approach proposed for parsing the schedule was to do so in a linear fashion: one lesson at a time, from top to bottom. The problem with this method was that multiple concurrent lessons were very common. This was especially prevalent in some particular schedules, such as the one below:
 	
 	\begin{figure}[h]%Lite röda ringar som visar där tider saknas
 		\centering
@@ -427,7 +427,7 @@
 		\label{fig:schedule-13esmu}
 	\end{figure}
 	
-	This problem was solved based on the observation that the texts corresponding to a fill always was contained by the correct fill, and no other. Because the fills and texts were described as rectangles (with a corner coordinate and a width and height), the texts for a particular fill could be found using a simple rectangle intersection test.
+	This problem was solved based on the observation that the texts corresponding to a fill always was contained by the correct fill, and no other. Because the fills and texts were described as rectangles (with a corner coordinate and a width and a height), the texts for a particular fill could be found using a simple rectangle intersection test.
 	
 	\begin{figure}[!h]
 		\centering
@@ -436,16 +436,16 @@
 		\label{fig:rectangles-intersecting}
 	\end{figure}
 	
-	Another problem that had to be solved was that start or end times were not always assigned to lessons. Instead, if multiple lessons started at the same time, the time text was only placed on the leftmost lesson. This also applies to end times and can be seen in the above image. The initial solution for the problem was to search among the neighbors of the lessons missing times. However this solution proved unstable and could not successfully parse every schedule. Instead, when thinking about how we humans understand such a schedule, the fairly obvious but very useful observation was made that the times were always along the same horizontal line as the start or end bounds of the lessons. This is how us humans read the schedule; if there is a lesson that for example lacks a start time, we look along the same line until we find a lesson with a start time. Using this method, the missing times could be found by performing rectangle-line intersection tests.
+	Another problem that had to be solved was that start or end times were not always assigned to lessons. Instead, if multiple lessons started at the same time, the time text was only placed on the leftmost lesson. This also applied to end times and can be seen in the above image. The initial solution for the problem was to search among the neighbors of the lessons missing times. However this solution proved unstable and could not successfully parse every schedule. Instead, when thinking about how we humans understand such a schedule, the fairly obvious but very useful observation was made that the times were always along the same horizontal line as the start or end bounds of the lessons. This is how we humans read the schedule; if there is a lesson that for example lacks a start time, we look along the same line until we find a lesson with a start time. Using this method, the missing times could be found by performing rectangle-line intersection tests.
 	%Det här stycket är skrivet väldigt likt en blog post och skiljer sig ganska mycket från tidigare bitar av paperet. Det är inte nödvändigtvist fel och det beror på hur formellt man vill att slutresultatet ska vara. Jag har ingen CS erfarenhet men jag hade inte förväntat mig sånt här språk i ett MatFy paper.
 	
-	On some schedules, it was noticed that some times are not written out in full, but instead showing only the minute (as found in figure \ref{fig:pdf-no-text}). This was however easily solved by finding the closest above time and completing with its hour. In some cases, where the next hour has started, the hour has to be incremented by one.
+	On some schedules, it was noticed that some times are not written out in full, instead only showing the minute (see figure \ref{fig:pdf-no-text}). This was however easily solved by finding the closest above time and using its hour to complete the missing information. In some cases, where the next hour had started, the hour had to be incremented by one.
 	
 	\subsection{Determining lesson details}
-	The lesson texts had now been found and a way of extracting the lesson information from them described in the output format (such as the course) was needed. This was tricky because of inconsistencies between schedules and many edge cases were encountered in certain schedules. Some lessons for example lacked information about the location or would include extra fields, making it difficult to detect the relevant ones. A solution keeping as general as possible, but still capturing all the cases, was sought. Unfortunately methods of detecting a course, location and teacher were required, losing some generality because the definitions may differ between schedules. This was primarily done via the use of regular expressions.
+	The lesson texts had now been found but a way of extracting the lesson information from them as described in the output format (such as the course) was needed. This was tricky because of inconsistencies between schedules, causing many edge cases. Some lessons for example lacked information about their location or would include extra fields, making it difficult to detect the relevant ones. A solution which was as general as possible, but which would still capture all the cases was sought. Unfortunately methods of detecting a course, a location and a teacher were required, losing some generality as the definitions may differ between schedules. This was primarily done via the use of regular expressions.
 	
 	\subsection{Incomplete lessons}
-	It was quickly discovered that a problem with the PDF verison of the schedule was that some lessons lacked text. This was especially prevalent where the lessons were very small and densely packed.
+	It was quickly discovered that a problem with the PDF version of the schedule was that some lessons lacked text. This was especially prevalent where the lessons were very small and densely packed.
 	
 	\begin{figure}[h]
 		\centering
@@ -457,7 +457,7 @@
 	These lessons had to be completed from another source.
 	
 	\subsection{Completing lessons}
-	As described in section \ref{image endpoint} when clicking within the bounds of a lesson on the schedule page, a detail page would load containing the information of that particular lesson. This was exploited in order to fetch information for the incomplete lessons without text since this was available for every lesson.
+	As described in section \ref{image endpoint}, when clicking within the bounds of a lesson on the schedule page, a detail page would load containing the information of that particular lesson. This was exploited in order to fetch information for the incomplete lessons without text since this was available for every lesson.
 	
 	It was discovered that the request that had to be performed in order to simulate the click contained the x and y coordinates for the click as well as the width and height of the schedule image that was being clicked upon. The next problem to determine these coordinates.
 	

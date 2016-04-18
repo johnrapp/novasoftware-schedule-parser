@@ -30,11 +30,15 @@ var pdfUrl = 'http://www.novasoftware.se/ImgGen/schedulegenerator.aspx';
 var pngUrl = 'http://www.novasoftware.se/ImgGen/schedulegenerator.aspx';
 
 module.exports.setup = function(config) {
-	schoolId = config.schoolId || schoolId;
-	schoolCode = config.schoolCode || schoolCode;
+	schoolId = withDefault(config.schoolId, schoolId);
+	schoolCode = withDefault(config.schoolCode, schoolCode);
 	baseUrl = buildBaseUrl(schoolId, schoolCode);
 
-	requestTimeout = config.requestTimeout || requestTimeout;
+	requestTimeout = withDefault(config.requestTimeout, requestTimeout);
+}
+
+function withDefault(value, defaultValue) {
+	return typeof value === 'undefined' ? defaultValue : value;
 }
 
 var performRequest = function(options, callback) {
