@@ -1,7 +1,7 @@
 var request = require('request');
-var cheerio = require('cheerio');
 var fs = require('fs');
 var async = require('async');
+var parseClickedLesson = require('./parse-clicked-lesson.js');
 
 var schoolId = 99810; //vgy
 var schoolCode = 945537;
@@ -281,7 +281,7 @@ module.exports.clickMultiple = function(week, classId, coords, w, h, callback) {
 										return callback(err, null)
 									}
 
-									var lesson = scrapeClickedLesson(body);
+									var lesson = parseClickedLesson(body);
 
 									callback(null, lesson);
 								});
@@ -297,50 +297,3 @@ module.exports.clickMultiple = function(week, classId, coords, w, h, callback) {
 
 };
 
-
-function scrapeClickedLesson(body) {
-	var $ = cheerio.load(body);
-
-	var rows = $('tr').get();
-
-	//The time is usually in the first row
-	var timeElement = rows.shift();
-	var time = getText(timeElement);
-
-	if(/^Block:/.test(time)) {
-		//Take the next row
-		time = getText(rows.shift());
-	}
-
-	var times = time.split(' - ');
-	var startTime = times[0];
-	var endTime = times[1];
-
-	//There is always one redundant row in the end
-	rows.pop();
-
-	var details = rows.map(function(element) {
-		var columns = $(element).children().get().map(getText);
-		var course = columns[0];
-		var teacher = columns[1];
-		var unknown = columns[2];
-		var location = columns[3];
-
-		return {
-			course: course,
-			teacher: teacher,
-			unknown: unknown,
-			location: location,
-		}
-	});
-
-	function getText(element) {
-		return $(element).text();
-	}
-
-	return {
-		startTime: startTime,
-		endTime: endTime,
-		details: details
-	};
-}

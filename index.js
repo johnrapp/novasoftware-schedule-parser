@@ -6,11 +6,7 @@ var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
 
-var config = require('./config-example.json');
-
-delete config.schoolId;
-delete config.schoolCode;
-delete config.requestTimeout;
+var config = require('./config.json');
 
 novasoftware.setup(config);
 
