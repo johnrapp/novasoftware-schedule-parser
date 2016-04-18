@@ -25,7 +25,7 @@ To run the program navigate to the project root directory and execute
 ```sh
 $ node .
 ```
-This will dowload the schedules specified in `config.json` and placing them `schedules` directory. The first level in the `schedules` directory contains the weeks while the next level contains the schedules (e.g the schedule for 13TE week 15 is found at `schedules/15/13TE.json`).
+This will download the schedules specified in `config.json` and placing them `schedules` directory. The first level in the `schedules` directory contains the weeks while the next level contains the schedules (e.g the schedule for 13TE week 15 is found at `schedules/15/13TE.json`).
 
 #### `config.json`
 The program may be configured using the `config.json` file. The default config looks as such
@@ -48,7 +48,7 @@ The properties of the config object are
 * **schoolCode** - `{number}` - The school code, found in the URL query string as `code`
 * **classes** - `{[string]|"*"}` - The array of class names. If the string "'*"` instead is provided, all classes will be included
 * **weeks** - `{[number]|"*"}` - The array of weeks. The string `"*"` denotes all weeks
-* **requestTimeout** - `{number}` - Optional. The timeout between requests
+* **requestTimeout** - `{number}` - Optional. The timeout between subsequent HTTP requests
 
 If no `schoolId` or `schoolCode` is provided, the program will use the id and code of Värmdö Gymnasium.
 
@@ -57,7 +57,7 @@ For example the configuration to fetch all classes and weeks for the default sch
 {
 	"classes": "*",
 	"weeks": "*",
-    "requestTimeout": 0
+	"requestTimeout": 0
 }
 ```
 
