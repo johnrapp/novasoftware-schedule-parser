@@ -40,4 +40,4 @@ paper/paper.toc
 paper/paperNotes.bib
 
 # Fetched schedules
-schedules/**.json
+schedules/**.*
