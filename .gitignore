@@ -31,3 +31,13 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Generated tex files
+paper/paper.log
+paper/paper.aux
+paper/paper.synctex.gz
+paper/paper.toc
+paper/paper.bib
+
+# Fetched schedules
+schedules/*
