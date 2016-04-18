@@ -6,7 +6,7 @@
 \contentsline {subsection}{\numberline {1.4}Theory}{2}
 \contentsline {subsubsection}{\numberline {1.4.1}HTTP-requests}{2}
 \contentsline {subsubsection}{\numberline {1.4.2}HTML}{3}
-\contentsline {subsubsection}{\numberline {1.4.3}JSON}{3}
+\contentsline {subsubsection}{\numberline {1.4.3}JSON}{4}
 \contentsline {subsubsection}{\numberline {1.4.4}PNG and PDF}{4}
 \contentsline {subsubsection}{\numberline {1.4.5}Regular expressions}{4}
 \contentsline {subsection}{\numberline {1.5}Conventions}{4}

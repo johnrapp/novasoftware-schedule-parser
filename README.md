@@ -21,6 +21,48 @@ $ npm install
 
 ### Usage
 
+To run the program navigate to the project root directory and execute
+```sh
+$ node .
+```
+This will dowload the schedules specified in `config.json` and placing them `schedules` directory. The first level in the `schedules` directory contains the weeks while the next level contains the schedules (e.g the schedule for 13TE week 15 is found at `schedules/15/13TE.json`).
+
+#### `config.json`
+The program may be configured using the `config.json` file. The default config looks as such
+
+```json
+{
+	"schoolId": 99810,
+	"schoolCode": 945537,
+	"classes": [
+		"13TE",
+		"13ESMU"
+	],
+	"weeks": [
+		15, 16
+	]
+}
+```
+The properties of the config object are
+* **schoolId** - `{number}` - The school id, found in the URL query string as `schoolid`
+* **schoolCode** - `{number}` - The school code, found in the URL query string as `code`
+* **classes** - `{[string]|'*'}` - The array of class names. If the string `'*'` instead is provided, all classes will be included
+* **weeks** - `{[number]|'*'}` - The array of weeks. The string `'*'` means all weeks
+* **requestTimeout** - `{number}` - Optional. The timeout between requests
+
+If no `schoolId` or `schoolCode` is provided, the program will use the ID and code of Värmdö Gymnasium.
+##### School IDs and codes
+The  school ids and codes of some schools (in no particular order or reason for selection) are presented in the table bewlow. The third column indicates whether or not the program has successfully parsed schedules from the school. A check provides no guarantee that the parsing process works. If the parsing process produces an error, adjustments may have to be made to the source code.
+
+| School                    | schoolId | schoolCode | Tested |
+|---------------------------|----------|------------|:------:|
+| Värmdö Gymnasium          | 99810    | 945537     |    ✓   |
+| Östra Real                | 59150    | 522626     |    ✓   |
+| Tyresö Gymnasium          | 27820    | 519876     |    ✓   |
+| Sundsta-Älvkullegymnasiet | 18200    | 993161     |    ✓   |
+| Norra Real                | 81530    | 123489     |    ✕   |
+| Katedralskolan i Uppsala  | 68600    | 12689      |    ✕   |
+| Thorildsplans gymnasium   | 80710    | 211677     |    ✕   |
 
 ### Code
 The implementation is written in JavaScript for Node.js.
@@ -30,165 +72,4 @@ The main parsing logic is contained in `parse-lessons.js`.
 `novasoftware.js` contains the HTTP requests.
 
 ## License
-GNU General Public License v3.0, see [LICENCE](LICENCE)
-
-
-
-Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered HTML5 Markdown editor.
-
-  - Type some Markdown on the left
-  - See HTML in the right
-  - Magic
-
-Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
-
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
-
-### Version
-3.2.7
-
-### Tech
-
-Dillinger uses a number of open source projects to work properly:
-
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [Marked] - a super fast port of Markdown to JavaScript
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [keymaster.js] - awesome keyboard handler lib by [@thomasfuchs]
-* [jQuery] - duh
-
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
-
-### Installation
-
-You need Gulp installed globally:
-
-```sh
-$ npm i -g gulp
-```
-
-```sh
-$ git clone [git-repo-url] dillinger
-$ cd dillinger
-$ npm i -d
-$ gulp build --prod
-$ NODE_ENV=production node app
-```
-
-### Plugins
-
-Dillinger is currently extended with the following plugins
-
-* Dropbox
-* Github
-* Google Drive
-* OneDrive
-
-Readmes, how to use them in your own application can be found here:
-
-* [plugins/dropbox/README.md] [PlDb]
-* [plugins/github/README.md] [PlGh]
-* [plugins/googledrive/README.md] [PlGd]
-* [plugins/onedrive/README.md] [PlOd]
-
-### Development
-
-Want to contribute? Great!
-
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantanously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-```sh
-$ node app
-```
-
-Second Tab:
-```sh
-$ gulp watch
-```
-
-(optional) Third:
-```sh
-$ karma start
-```
-
-### Docker
-Dillinger is very easy to install and deploy in a Docker container.
-
-By default, the Docker will expose port 80, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image. 
-
-```sh
-cd dillinger
-docker build -t <youruser>/dillinger:latest .
-```
-This will create the dillinger image and pull in the necessary dependencies. Once done, run the Docker and map the port to whatever you wish on your host. In this example, we simply map port 80 of the host to port 80 of the Docker (or whatever port was exposed in the Dockerfile):
-
-```sh
-docker run -d -p 80:80 --restart="always" <youruser>/dillinger:latest
-```
-
-Verify the deployment by navigating to your server address in your preferred browser.
-
-### N|Solid and NGINX
-
-More details coming soon.
-
-#### docker-compose.yml
-
-Change the path for the nginx conf mounting path to your full path, not mine!
-
-### Todos
-
- - Write Tests
- - Rethink Github Save
- - Add Code Comments
- - Add Night Mode
-
-License
-----
-
-MIT
-
-
-**Free Software, Hell Yeah!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [@thomasfuchs]: <http://twitter.com/thomasfuchs>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [marked]: <https://github.com/chjj/marked>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [keymaster.js]: <https://github.com/madrobby/keymaster>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]:  <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-
+GNU General Public License v3.0, see [LICENCE](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/LICENSE)
