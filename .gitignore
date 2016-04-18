@@ -37,7 +37,7 @@ paper/paper.log
 paper/paper.aux
 paper/paper.synctex.gz
 paper/paper.toc
-paper/paper.bib
+paper/paperNotes.bib
 
 # Fetched schedules
-schedules/*
+schedules/**.json

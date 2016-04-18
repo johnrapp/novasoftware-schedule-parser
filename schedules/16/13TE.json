@@ -1,0 +1,196 @@
+{
+	"titles": [
+		"Måndag 18/4",
+		"Tisdag 19/4",
+		"Onsdag 20/4",
+		"Torsdag 21/4",
+		"Fredag 22/4"
+	],
+	"lessons": [
+		{
+			"startTime": "08:30",
+			"endTime": "10:00",
+			"details": [
+				{
+					"course": "KEMKEM01",
+					"teacher": "Bå",
+					"location": "B35"
+				}
+			],
+			"day": 0
+		},
+		{
+			"startTime": "13:10",
+			"endTime": "14:00",
+			"details": [
+				{
+					"course": "KEMKEM01",
+					"teacher": "Bå",
+					"location": "B38"
+				}
+			],
+			"day": 0
+		},
+		{
+			"startTime": "14:20",
+			"endTime": "15:35",
+			"details": [
+				{
+					"course": "De som läser etnicit. o kulturm.",
+					"teacher": null,
+					"location": null
+				}
+			],
+			"day": 0
+		},
+		{
+			"startTime": "10:15",
+			"endTime": "12:15",
+			"details": [
+				{
+					"course": "TISDAG",
+					"teacher": "Bå,Hgm",
+					"location": "A0"
+				}
+			],
+			"day": 1
+		},
+		{
+			"startTime": "13:15",
+			"endTime": "15:15",
+			"details": [
+				{
+					"course": "TISDAG",
+					"teacher": "Bå,Hgm",
+					"location": "A0"
+				}
+			],
+			"day": 1
+		},
+		{
+			"startTime": "15:30",
+			"endTime": "17:00",
+			"details": [
+				{
+					"course": "TISDAG",
+					"teacher": "Bå,Hgm",
+					"location": "A0"
+				}
+			],
+			"day": 1
+		},
+		{
+			"startTime": "10:20",
+			"endTime": "11:15",
+			"details": [
+				{
+					"course": "RELREL01",
+					"teacher": "Vs",
+					"location": "C22"
+				}
+			],
+			"day": 3
+		},
+		{
+			"startTime": "11:25",
+			"endTime": "12:20",
+			"details": [
+				{
+					"course": "HISHIS01a1",
+					"teacher": "Ave",
+					"location": "B46"
+				}
+			],
+			"day": 3
+		},
+		{
+			"startTime": "13:45",
+			"endTime": "14:50",
+			"details": [
+				{
+					"course": "SVESVE03",
+					"teacher": "Hl",
+					"location": "C111"
+				}
+			],
+			"day": 3
+		},
+		{
+			"startTime": "15:00",
+			"endTime": "17:00",
+			"details": [
+				{
+					"course": "ENGENG07",
+					"teacher": "Hgm",
+					"location": "A32"
+				},
+				{
+					"course": "FÖRFÖR01",
+					"teacher": "Vk",
+					"location": "A35"
+				},
+				{
+					"course": "KOSFIL0",
+					"teacher": "Be",
+					"location": "C311"
+				},
+				{
+					"course": "MATMAT05",
+					"teacher": "Eö",
+					"location": "A22"
+				}
+			],
+			"day": 3
+		},
+		{
+			"startTime": "09:20",
+			"endTime": "10:35",
+			"details": [
+				{
+					"course": "HISHIS01a1",
+					"teacher": "Ave",
+					"location": "A34"
+				}
+			],
+			"day": 4
+		},
+		{
+			"startTime": "11:00",
+			"endTime": "11:55",
+			"details": [
+				{
+					"course": "KEMKEM01",
+					"teacher": "Bå",
+					"location": "B36"
+				}
+			],
+			"day": 4
+		},
+		{
+			"startTime": "13:00",
+			"endTime": "14:00",
+			"details": [
+				{
+					"course": "RELREL01",
+					"teacher": "Vs",
+					"location": "B46"
+				}
+			],
+			"day": 4
+		},
+		{
+			"startTime": "14:20",
+			"endTime": "15:20",
+			"details": [
+				{
+					"course": "SVESVE03",
+					"teacher": "Hl",
+					"location": "C111"
+				}
+			],
+			"day": 4
+		}
+	],
+	"className": "13TE",
+	"week": 16
+}
