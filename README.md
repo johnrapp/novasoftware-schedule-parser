@@ -5,7 +5,7 @@ This project hosts the paper and implementation code for my final High School Es
 ## Paper
 The files for the paper are contained in the `paper` directory, where the actual paper document may be found as [`paper.pdf`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/paper/paper.pdf).
 
-The paper is written in LaTeX, with the source code in the file [`paper.tex`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/paper/paper.tex).
+The paper is written in LaTeX, with the source code in [`paper.tex`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/paper/paper.tex).
 
 ## Implementation
 
@@ -47,7 +47,7 @@ The properties of the config object are
 * **schoolId** - `{number}` - The school id, found in the URL query string as `schoolid`
 * **schoolCode** - `{number}` - The school code, found in the URL query string as `code`
 * **classes** - `{[string]|"*"}` - The array of class names. If the string "'*"` instead is provided, all classes will be included
-* **weeks** - `{[number]|"*"}` - The array of weeks. The string `"*"` means all weeks
+* **weeks** - `{[number]|"*"}` - The array of weeks. The string `"*"` denotes all weeks
 * **requestTimeout** - `{number}` - Optional. The timeout between requests
 
 If no `schoolId` or `schoolCode` is provided, the program will use the id and code of Värmdö Gymnasium.
@@ -63,7 +63,7 @@ For example the configuration to fetch all classes and weeks for the default sch
 
 
 ##### School IDs and codes
-The ids and codes of some schools and presented them in the table below. The schools are arbitrarily selected and in no particular order. The third column indicates whether or not the program has successfully parsed schedules from the school. A check mark provides no guarantee that the parsing process works, while a cross may not necessarily mean that it does not. If the program can not parse a particular schedule, adjustments may have to be made to the source code (you can learn about this in the paper).
+The ids and codes of some schools are presented in the table below. The schools are arbitrarily selected and in no particular order. The third column indicates whether or not the program has successfully parsed schedules from the school. A check mark provides no guarantee that the parsing process works, while a cross may not necessarily mean that it does not. If the program can not parse a particular schedule, adjustments may have to be made to the source code (you can learn about this in the paper).
 
 | School                    | schoolId | schoolCode | Tested |
 |---------------------------|----------|------------|:------:|
@@ -82,7 +82,7 @@ The PDF parsing logic is contained in [`parse-lessons.js`](https://github.com/jo
 
 All the communication with the Novasoftware server is done through [`novasoftware.js`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/novasoftware.js).
 
-### Demo
+## Demo
 The same process described in the process and implemented in this project powers the schedule viewing application [vgy.rocks/schema](http://vgy.rocks/schema) for Värmdö Gymnasium. The repository for this application may be found [here](https://github.com/johnrapp/schedule-parser/).
 
 ## License
