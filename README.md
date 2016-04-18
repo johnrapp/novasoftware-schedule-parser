@@ -75,27 +75,15 @@ The ids and codes of some schools and presented them in the table below. The sch
 | Katedralskolan i Uppsala  | 68600    | 12689      |    ✕   |
 | Thorildsplans gymnasium   | 80710    | 211677     |    ✕   |
 
-| School                    | schoolId | schoolCode | Successfully tested |
-|---------------------------|----------|------------|:-------------------:|
-| Värmdö Gymnasium          | 99810    | 945537     |          ✓          |
-| Östra Real                | 59150    | 522626     |          ✓          |
-| Tyresö Gymnasium          | 27820    | 519876     |          ✓          |
-| Sundsta-Älvkullegymnasiet | 18200    | 993161     |          ✓          |
-| Norra Real                | 81530    | 123489     |          ✕          |
-| Katedralskolan i Uppsala  | 68600    | 12689      |          ✕          |
-| Thorildsplans gymnasium   | 80710    | 211677     |          ✕          |
-
 ### Code
 The implementation is written in JavaScript for Node.js.
 
-The main parsing logic is contained in [`parse-lessons.js`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/parse-lessons.js).
+The PDF parsing logic is contained in [`parse-lessons.js`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/parse-lessons.js) while the parsing of clicked lessons is performed in [`parse-clicked-lesson.js`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/parse-clicked-lesson.js). These are the files to which adjustments can be made in order to support other schools or schedules.
 
-[`novasoftware.js`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/novasoftware.js) contains the HTTP requests.
-
-Adjustments can be made primarily to `parse-lessons.js` and `scrapeClickedLesson(body)` in `novasoftware.js`.
+All the communication with the Novasoftware server is done through [`novasoftware.js`](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/novasoftware.js).
 
 ### Demo
-The process described in the process and implemented in this project powers the schedule viewing application [vgy.rocks/schema](http://vgy.rocks/schema) for Värmdö Gymnasium. The repository for this application may be found [here](https://github.com/johnrapp/schedule-parser/).
+The same process described in the process and implemented in this project powers the schedule viewing application [vgy.rocks/schema](http://vgy.rocks/schema) for Värmdö Gymnasium. The repository for this application may be found [here](https://github.com/johnrapp/schedule-parser/).
 
 ## License
 GNU General Public License v3.0, see [LICENCE](https://github.com/johnrapp/novasoftware-schedule-parser/blob/master/LICENSE)
