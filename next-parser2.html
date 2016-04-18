@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body {
+		}
+		#wrapper {
+			opacity: 0.5;
+			position: absolute;
+			top: 8px;
+		}
+		#container {
+			background: #bbb;
+			position: relative;
+		}
+		.lesson {
+			position: absolute;
+			background: white;
+			border: 1px solid black;
+			box-sizing: border-box;
+		}
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+
+<img src="test.png">
+<div id="wrapper">
+	<div id="container"></div>
+</div>
+
+<script type="text/javascript">
+$.getJSON('pdf.json', function(data) {
+
+	console.log(data);
+
+	var sw = 0.995;
+	var width = Math.round(data.Width * 6) * sw;
+
+	var page = data.Pages[0];
+
+	var height = Math.round(page.Height * 6);
+
+	var $container = $('#container')
+
+	$container.width(width).height(height);
+
+	var texts = page.Texts;
+
+	var days = texts.slice(texts.length - 5, texts.length).map(function(o) {
+		return decodeURIComponent(o.R[0].T);
+	});
+
+	var lessonFills = page.Fills.filter(function(fill) {
+		//Not an empty fill
+		return fill.w > 0 && fill.h > 0
+		//Not a title fill
+		&& !(fill.w == 18.391 && fill.h == 2.75)
+		//Not too big of a fill
+		&& fill.h < 30
+		//Not too small of a fill
+		&& fill.w * fill.h > 2;
+	});
+
+	var sx = 1.1;
+	var sy = 1.07;
+	var tx = -30.5;
+	var ty = -12;
+
+	lessonFills = lessonFills.map(function(fill) {
+		var cx = (fill.x + fill.w / 2) * 6 * sx + tx;
+		return {
+			x: fill.x * 6 * sx + tx,
+			y: fill.y * 6 * sy + ty,
+			w: fill.w * 6 * sx,
+			h: fill.h * 6 * sy,
+			oc: fill.oc,
+			cx: cx,
+			cy: (fill.y + fill.h / 2) * 6 * sy + ty,
+			day: Math.floor(cx / width * 5)
+		}
+	});
+
+	var days = ['#f00', '#0f0', '#00f', '#ff0', '#f0f']
+	lessonFills.forEach(function(fill, i) {
+		$('<div>')
+			.addClass('lesson')
+			.width(fill.w)
+			.height(fill.h)
+			.css({
+				// background: days[fill.day],
+				background: fill.oc,
+				left: fill.x,
+				top: fill.y
+			})
+			.attr('day', fill.day)
+			.attr('lesson-id', i)
+			.appendTo($container);
+	});
+
+	$('<div>')
+		.addClass('lesson')
+		.width(6)
+		.height(6)
+		.css({
+			background: '#00f',
+			left: 426,
+			top: 152
+		})
+		.appendTo($container);
+
+	var i = 55;
+	// var i = 52;
+
+	var testX = lessonFills[i].cx;
+	var testY = lessonFills[i].cy;
+
+	$('<div>')
+		.addClass('lesson')
+		.width(6)
+		.height(6)
+		.css({
+			background: '#00f',
+			left: testX - 3,
+			top: testY - 3
+		})
+		.appendTo($container);
+});
+</script>
+
+</body>
+</html>

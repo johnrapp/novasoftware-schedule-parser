@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<style type="text/css">
+ 		img {
+ 			position: absolute;
+ 			top: 0px;
+ 			left: 0px;
+ 			z-index: 0;
+
+ 			/*width: 400px;
+ 			height: 400px;*/
+
+ 			image-rendering: pixelated;
+
+			/*display: none;*/
+
+ 			/*opacity: 0.2;*/
+ 		}
+ 		canvas {
+ 			position: absolute;
+ 			top: 0px;
+ 			left: 0px;
+ 			z-index: 1;
+
+ 			/*width: 400px;
+ 			height: 400px;*/
+ 		
+ 			image-rendering: pixelated;
+ 		}
+	</style>
+</head>
+
+<script type="text/javascript" src="jquery.js"></script>
+<body>
+
+<img src="test.png">
+<canvas></canvas>
+
+<script type="text/javascript">
+	
+var canvas = $('canvas');
+var ctx = canvas[0].getContext('2d');
+
+var img = $('img');
+var width = img[0].width;
+var height = img[0].height;
+
+canvas[0].width = width;
+canvas[0].height = height;
+
+var pixels = getPixels(img[0]);
+var openPixels = pixels.slice();
+
+var fills = [];
+
+var rec = 0;
+var ns = [];
+
+// var p = randomPixel();
+var p = 0;
+// var p = 74688 - 4*14 - width*4*46;
+// var p = 74688 - 4*17 - width*4*46;
+// var p = 74688 + 4*55 + width*4*64;
+// var p = 74688 + 4*111 + width*4*187;
+// var p = 74688;
+
+ctx.fillStyle = '#00f';
+// drawPixel(p);
+
+// var ps = [];
+// try {
+// 	floodFill(p, getColor(p), ps, 0);
+// } catch(e) {}
+// ctx.fillStyle = '#00f';
+// ps.forEach(function(p) {
+// 	drawPixel(p);
+// });
+
+// ctx.fillStyle = '#0ff';
+// ctx.fillRect(0, 0, width, 9);
+// ctx.fillRect(width - 5, 0, 5, height);
+// ctx.fillRect(0, height - 1, width, 1);
+
+// ctx.fillRect(0, 0, width, 10);
+// ctx.fillRect(0, 0, 1, height);
+// ctx.fillRect(width - 6, 0, 6, height);
+// ctx.fillRect(0, height - 2, width, 2);
+
+// ctx.fillStyle = '#2aa';
+// ctx.fillRect(14, 10, 1, height - 10 - 2);
+// ctx.fillRect(28, 10, 1, height - 10 - 2);
+// ctx.fillRect(41, 10, 1, height - 10 - 2);
+// ctx.fillRect(55, 10, 1, height - 10 - 2);
+
+var x = 233;
+var y = 240;
+ctx.fillRect(x - 2, y - 2, 4, 4);
+
+function floodFill(p, color, pixels, n) {
+	if(!compareColors(color, getColor(p)) || pixels.indexOf(p) !== -1) { 
+		return;
+	}
+	ns.push(n);
+	// ctx.fillStyle = '#f00';
+	// drawPixel(p);
+
+	pixels.push(p);
+	// console.log(pixelX(p), pixelY(p));
+
+	var pp = rightPixel(p);
+	if(compareColors(color, getColor(pp))) {
+		floodFill(pp, color, pixels, n + 1);
+	}
+
+	pp = leftPixel(p);
+	if(compareColors(color, getColor(pp))) {
+		floodFill(pp, color, pixels, n + 1);
+	}
+
+	pp = downPixel(p);
+	if(compareColors(color, getColor(pp))) {
+		floodFill(pp, color, pixels, n + 1);
+	}
+
+	pp = upPixel(p);
+	if(compareColors(color, getColor(pp))) {
+		floodFill(pp, color, pixels, n + 1);
+	}
+
+	// [rightPixel, leftPixel, downPixel, upPixel].forEach(function(getPixel) {
+	// 	var pp = getPixel(p);
+	// 	if(compareColors(color, getColor(pp))) {
+	// 		floodFill(pp, color, pixels, n + 1);
+	// 	}
+	// });
+}
+
+function floodFill2() {
+
+}
+
+function compareColors(a, b) {
+	return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
+}
+
+function getColor(p) {
+	return [pixels[p], pixels[p + 1], pixels[p + 2]];
+}
+
+function drawPixel(p) {
+	var x = pixelX(p);
+	var y = pixelY(p);
+
+	// ctx.fillRect(x - 3, y - 3, 6, 6);
+	// ctx.fillRect(x - 1, y - 1, 2, 2);
+	ctx.fillRect(x, y, 1, 1);
+}
+
+function pixelAt(x, y) {
+	return x * 4 + y * width * 4;
+}
+
+function pixelX(p) {
+	return (p / 4) % width;
+}
+function pixelY(p) {
+	return Math.floor((p / 4) / width);
+}
+
+function randomPixel() {
+	return Math.floor(Math.random() * width * height) * 4;
+}
+
+function leftPixel(p) {
+	return p - 4;
+}
+function rightPixel(p) {
+	return p + 4;
+}
+function downPixel(p) {
+	return p + width * 4;
+}
+function upPixel(p) {
+	return p - width * 4;
+}
+
+function count(n) {
+	var array = [];
+	for(var i = 0; i < n; i++) {
+		array.push(i);
+	}
+	return array;
+}
+
+function getPixels(img) {
+	var canvas = document.createElement('canvas');
+	var ctx = canvas.getContext('2d');
+
+	canvas.width = img.width;
+	canvas.height = img.height;
+
+	ctx.drawImage(img, 0, 0, img.width, img.height);
+
+	return ctx.getImageData(0, 0, img.width, img.height).data;
+}
+
+</script>
+
+</body>
+</html>
