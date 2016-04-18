@@ -46,6 +46,7 @@
 \contentsline {subsection}{\numberline {6.1}Implementation}{23}
 \contentsline {subsubsection}{\numberline {6.1.1}Installation}{23}
 \contentsline {subsubsection}{\numberline {6.1.2}Usage}{24}
+\contentsline {subsubsection}{\numberline {6.1.3}GitHub readme}{24}
 \contentsline {subsection}{\numberline {6.2}Considerations}{24}
 \contentsline {section}{Appendix \numberline {A}The schedule format}{25}
 \contentsline {section}{Appendix \numberline {B}The parsed PDF}{26}

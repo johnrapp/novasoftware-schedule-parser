@@ -858,11 +858,10 @@
 	The data may also be used for research purposes. For example one could analyze different schedules and present information about properties such as day lengths and starts, or drawing meaningful conclusions about the school experience.
 	
 	\subsection{Implementation}
-	The implementation is hosted on the code sharing website GitHub at the following URL \url{https://github.com/johnrapp/novasoftware-schedule-parser}. You are free to download, modify and use the source code of this project without asking for permission. %Kanske ha en licens (kanske i GitHub istället)
+	The implementation is hosted on the code sharing website GitHub.com at the following URL: \url{https://github.com/johnrapp/novasoftware-schedule-parser}. You are free to download, modify and use the source code of this project without asking for permission.
 	
 	\subsubsection{Installation}
-	%Kanske skriva det här i GitHub readmen så att den kan ändras
-	The project requires Node.js on the running machine. Instructions for installing Node.js are found at the Node.js website \url{https://nodejs.org/en/download/}. %Kanske inte ta med pathen eftersom den kan ändras (bara https://nodejs.org)
+	The project requires Node.js on the running machine. Instructions for installing Node.js are found at the Node.js website \url{https://nodejs.org/en/download/}.
 	
 	Because the project uses external modules, these dependencies has to be installed using npm (Node Package Manager), included in Node.js.
 	
@@ -872,7 +871,10 @@
 	\subsubsection{Usage}
 	To run the program, open a terminal window and run the command\\
 	\texttt{\$ node .}\\
-	This will fetch all the Värmdö Gymnasium schedules and save them in the \texttt{schedules} directory.
+	This will fetch a selected set of schedules from Värmdö Gymnasium and save them in the \texttt{schedules} directory.
+	
+	\subsubsection{GitHub readme}
+	More information about the provided implementation, as well as more thorough instructions may be found in the GitHub readme at \url{https://github.com/johnrapp/novasoftware-schedule-parser#readme}.
 	
 	\subsection{Considerations}
 	If you plan to implement this method please consider that the Novasoftware may get overloaded if it is receiving too many concurrent requests. If you do this, your activity will be inseparable from a DOS (Denial of Service) attack, which may damage the servers or the business. This will also limit regular users ability to use the viewer as it may slow down or restrict the availability of the application. In order to minimize the risk of slowing down or damaging the servers, please consider not sending more than one concurrent request, preferably with a timeout between each request. This is of course included in the provided implementation. It is also considerate to perform the fetching during non peak hours, such as in the night.

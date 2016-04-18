@@ -3,24 +3,9 @@ var fs = require('fs');
 var async = require('async');
 var parseClickedLesson = require('./parse-clicked-lesson.js');
 
-var schoolId = 99810; //vgy
+//Default is Värmdö Gymnasium
+var schoolId = 99810;
 var schoolCode = 945537;
-// var schoolId = 59150; //Östra Real
-// var schoolCode = 522626;
-// var schoolId = 27820; //Tyresö gy
-// var schoolCode = 519876;
-// var schoolId = 18200; //Sundsta-Älvkullegymnasiet
-// var schoolCode = 993161;
-
-// var schoolId = 81530; //Norra
-// var schoolCode = 123489;
-// var schoolId = 68600; //Katedral uppsala
-// var schoolCode = 12689;
-// var schoolId = 83670; //Duveholmsgymnasiet
-// var schoolCode = 685283;
-// var schoolId = 80710; //Thorildsplan
-// var schoolCode = 211677;
-
 
 function buildBaseUrl(schoolId, schoolCode) {
 	return 'http://www.novasoftware.se/WebViewer//MZDesign1.aspx?schoolid=' + schoolId + '&code=' + schoolCode;
@@ -79,8 +64,7 @@ function $timeout(time) {
 	});
 }
 
-function queuedRequest(options, callback/* arguments */) {
-	// var args = arguments; 
+function queuedRequest(options, callback) {
 	return new Promise(function(resolveReturned) {
 		queue(function() {
 			return new Promise(function(resolve, reject) {
