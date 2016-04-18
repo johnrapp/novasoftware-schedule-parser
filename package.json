@@ -1,0 +1,23 @@
+{
+  "name": "novasoftware-schedule-parser",
+  "version": "1.0.0",
+  "description": "Novasoftware schedule parser",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnrapp/novasoftware-schedule-parser.git"
+  },
+  "author": "John Rapp Farnes",
+  "license": "SEE LICENCE IN LICENCE",
+  "bugs": {
+    "url": "https://github.com/johnrapp/novasoftware-schedule-parser/issues"
+  },
+  "homepage": "https://github.com/johnrapp/novasoftware-schedule-parser#readme",
+  "dependencies": {
+    "async": "^1.5.2",
+    "cheerio": "^0.20.0",
+    "mkdirp": "^0.5.1",
+    "pdf2json": "0.7.1",
+    "request": "^2.72.0"
+  }
+}

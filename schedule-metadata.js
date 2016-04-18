@@ -1,6 +1,5 @@
 var cheerio = require('cheerio');
 var fs = require('fs');
-var parser = require('./parser.js');
 var async = require('async');
 
 var novasoftware = require('./novasoftware.js');
@@ -8,7 +7,6 @@ var novasoftware = require('./novasoftware.js');
 module.exports.fetch = function fetch(callback) {
 	novasoftware.view(0, function(err, body) {
 		var $ = cheerio.load(body);
-		// fs.writeFileSync('output.html', body, "utf8");
 
 		var weekOptions = $('#WeekDropDownList option');
 		var weeks = weekOptions.map(function(i, element) {

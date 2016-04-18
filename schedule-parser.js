@@ -1,10 +1,9 @@
 var novasoftware = require('./novasoftware.js');
-var pdfParser = require('./next-pdf-parser.js');
+var pdfParser = require('./pdf-parser.js');
 var fs = require('fs');
 
 function parseSchedule(week, classId, className, callback) {
 	novasoftware.schedulePdf(week, classId, function(err, buffer) {
-		// var buffer = fs.readFileSync('schedules-vgy/13esmu.pdf');
 		if(err) { return callback(err, null) }
 
 		pdfParser(buffer, function(err, schedule) {
@@ -30,15 +29,13 @@ function parseSchedule(week, classId, className, callback) {
 			var width = Math.round(schedule.width);
 			var height = Math.round(schedule.height);
 
-			// coords = coords.slice(0, 2);
-
-			novasoftware.clickMultiple2(week, classId, coords, width, height, function(err, lessons) {
-			// novasoftware.clickMultiple(week, classId, coords, width, height, function(err, lessons) {
-				// fs.writeFileSync("tt7.json", JSON.stringify(lessons, null, '\t'));
+			novasoftware.clickMultiple(week, classId, coords, width, height, function(err, lessons) {
 				if(err) { return callback(err, null) }
 
 				lessons.forEach(function(lesson, i) {
-					delete lesson.details.unknown;
+					lesson.details.forEach(function(detail) {
+						delete detail.unknown;
+					});
 					incompleteLessons[i].details = lesson.details;
 				});
 
@@ -46,8 +43,6 @@ function parseSchedule(week, classId, className, callback) {
 				callback(null, schedule);
 			});
 
-			// fs.writeFileSync("tt6.json", JSON.stringify(incompleteLessons, null, '\t'));
-			// fs.writeFileSync("tt5.json", JSON.stringify(schedule, null, '\t'));
 		});
 	});
 
@@ -57,14 +52,11 @@ function parseSchedule(week, classId, className, callback) {
 		schedule.lessons.forEach(function(lesson) {
 			delete lesson.cx;
 			delete lesson.cy;
-			//TODO remove
-			// if(lesson.details)
 			lesson.details.forEach(function(detail) {
 				delete detail.unknowns;
 			});
 		});
 	}
 }
-
 
 module.exports = parseSchedule;

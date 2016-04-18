@@ -1,95 +1,67 @@
-var express = require('express');
-var app = express();
+var scheduleParser = require('./schedule-parser.js');
+var scheduleMeta = require('./schedule-metadata.js');
+var novasoftware = require('./novasoftware.js');
 var async = require('async');
+var fs = require('fs');
+var path = require('path');
+var mkdirp = require('mkdirp');
 
-const PORT = 8080;
+var config = require('./config-example.json');
 
-var schedule = require('./schedule.js');
-var tuesday = require('./tuesday/tuesday.js');
-var scheduleMetadata = require('./schedule-metadata.js');
+delete config.schoolId;
+delete config.schoolCode;
+delete config.requestTimeout;
 
-app.use(function(req, res, next) {
-	if(req.query.tuesdays === 'true') {
-		req.tuesdays = true;
+novasoftware.setup(config);
+
+scheduleMeta.fetch(function(err, meta) {
+	var weeks = config.weeks;
+	var classes = meta.classes;
+
+	if(weeks === '*') {
+		weeks = meta.weeks;
 	}
-	next();
-});
 
-app.get('/s/schedule/:week', function(req, res) {
-	var week = req.params.week;
-	schedule.fetch(week, function(err, data) {
-		if(data) {
-			res.json(data);
-		} else {
-			res.status(400).end(err.message);
-		}
-	});		
-});
-
-app.get('/s/tuesday/:week', function(req, res) {
-	var week = req.params.week;
-	tuesday.fetch(week, function(data) {
-		res.json(data);
-	});
-});
-
-app.get('/s/metadata', function(req, res) {
-	if(req.tuesdays) {
-
-	}
-	scheduleMetadata.fetch(function(err, metadata) {
-			
-	});
-});
-
-app.get('/s/schedule/withtuesday/:week', function(req, res) {
-	var week = req.params.week;
-
-	async.parallel([
-		schedule.fetch.bind(null, week),
-		tuesday.fetch.bind(null, week)
-	], function(err, data) {
-		if(err) { return res.status(400).end(err.message); }
-
-		var scheduleData = data[0];
-		var tuesdayData = data[1];
-
-		var schedules = {};
-		scheduleData.forEach(function(classSchedule) {
-			schedules[classSchedule.className] = {
-				parseError: classSchedule.parseError,
-				titles: classSchedule.titles,
-				lessons: classSchedule.lessons
-			};
+	if(config.classes !== '*') {
+		classes = meta.classes.filter(function(classItem) {
+			return config.classes.indexOf(classItem.name) !== -1;
 		});
-		tuesdayData.forEach(function(classTuesday, i) {
-			var schedule = schedules[classTuesday.className];
-			schedule.lessons = schedule.lessons
-			.filter(function(lesson) {
-				return lesson.day != 1;
-			})
-			.concat(classTuesday.lessons.map(function(lesson) {
-				return {
-					startTime: lesson.startTime,
-					endTime: lesson.endTime,
-					rows: [lesson.description],
-					day: 1
+	}
+
+	parseSchedules(weeks, classes);
+});
+
+function parseSchedules(weeks, classes) {
+	var start = Date.now();
+	async.series(weeks.map(function(week) {
+		return function(callback) {
+			async.series(classes.map(function(classItem) {
+				return function(callback) {
+					console.log('Started', week, classItem.name)
+					scheduleParser(week, classItem.id, classItem.name, function(err, schedule) {
+						if(err == null) {
+							console.log('Finished', week, classItem.name)
+							outputSchedule(schedule, week, classItem.name);
+						}
+						callback(err, schedule);
+					});
 				};
-			}));
-		});
+			}), callback);
+		};
+	}),
+	function(err, weeks) {
+		if(err) { console.error(err); }
+		console.log(Date.now() - start);
+	});
+}
 
-		var scheduleArray = [];
+function outputSchedule(schedule, week, className) {
+	var dir = path.join('schedules', week.toString());
+	var file = path.join(dir, className + '.json');
 
-		for(var className in schedules) {
-			var schedule = schedules[className];
-			schedule.className = className;
-			scheduleArray.push(schedule);
-		}
+	mkdirp(dir, function(err) {
+		if(err) { return console.error('Failed to create directory', dir); }
 
-		res.json(scheduleArray);
-	})
-});
-
-var server = app.listen(PORT, function () {
-	console.log('Server listening at http://localhost:%s', PORT);
-});
+		fs.writeFile(file, JSON.stringify(schedule, null, '\t'));
+	});
+}

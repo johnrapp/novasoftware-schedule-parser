@@ -1,4 +1,4 @@
-module.exports = function parseLessons(pdfData, render, postRender) {
+module.exports = function parseLessons(pdfData) {
 	var sw = 0.995;
 	var width = Math.round(pdfData.Width * 6) * sw;
 
@@ -87,15 +87,15 @@ module.exports = function parseLessons(pdfData, render, postRender) {
 		days[fill.day].lessonFills.push(fill);
 	});
 	lessonTexts.forEach(function(text) {
+		if(text.day !== -1)
 		days[text.day].lessonTexts.push(text);
 	});
 	timeTexts.forEach(function(text) {
+		if(text.day !== -1)
 		days[text.day].timeTexts.push(text);
 	});
 
 	var days = days.slice(0, 5);
-	
-	render && render(width, height, days, titles);
 
 	days.forEach(function(day, i) {
 		day.lessonFills.forEach(function(lessonFill, j) {
@@ -260,10 +260,6 @@ module.exports = function parseLessons(pdfData, render, postRender) {
 	function stringEndsWith(string, test) {
 		return string.indexOf(test, string.length - test.length) !== -1;
 	}
-	// console.log(lessonFills.map(x => x.rows.map(y => y.text)))
-	// console.log(lessonFills.map(x => x.rows.map(y => y.text).join('|').replace(/  /g, '|').replace(/ /g, '|').split('|')))
-
-	postRender && postRender(days);
 
 	var lessons = lessonFills.map(function(lessonFill) {
 		return {
@@ -275,24 +271,6 @@ module.exports = function parseLessons(pdfData, render, postRender) {
 			cy: lessonFill.cy
 		};
 	});
-
-
-	// console.log(lessonFills.map(x => {
-	// 	// return x.details[0].location;
-	// 	return x.details;
-	// 	// return x.details.map(x => x.unknowns);
-	// }));
-
-	// var details = lessonFills.reduce(function(details, lessonFill) {
-	// 	return details.concat(lessonFill.details);
-	// }, [])
-	// console.log(details.map(x => {
-	// 	// return x.details[0].location;
-	// 	return x.location;
-	// }));
-
-	// console.log(lessons)
-	
 
 	function intersectHorizontalLine(yMin, yMax, yLine) {
 		return yLine >= yMin && yLine <= yMax;

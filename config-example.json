@@ -1,0 +1,9 @@
+{
+	"schoolId": 59150,
+	"schoolCode": 522626,
+	"classes": "*",
+	"weeks": [
+		15
+	],
+	"requestTimeout": 50
+}
