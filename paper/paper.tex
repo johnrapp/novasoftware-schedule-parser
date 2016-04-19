@@ -689,6 +689,7 @@
 		while(parts.length) {
 			var course = parts.shift();
 			var unknowns = [];
+			
 			while(parts[0] && isUnknown(parts[0])) {
 				unknowns.push(parts.shift());
 			}
@@ -741,6 +742,7 @@
 	
 	Next we will trick Novasoftware that we are viewing the schedule by loading a PNG of it. We will load it with width 1 and height 1 in order to maximize speed. Perform the request:
 	
+	\newpage
 	\begin{lstlisting}[language=HTTP, style=nonumbers]
 	GET
 	http://www.novasoftware.se/ImgGen/schedulegenerator.aspx
