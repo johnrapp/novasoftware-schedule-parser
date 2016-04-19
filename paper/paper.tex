@@ -877,7 +877,8 @@
 	More information about the provided implementation, as well as more thorough instructions may be found in the GitHub readme at \url{https://github.com/johnrapp/novasoftware-schedule-parser#readme}.
 	
 	\subsection{Considerations}
-	Anyone who plans to implement this method should consider that the Novasoftware may get overloaded if it is receiving too many concurrent requests. If not considered, the users activity will be inseparable from a DOS (Denial of Service) attack, which might damage the servers or the business. This will also limit regular users ability to use the viewer as it may slow down or restrict the availability of the application. In order to minimize the risk of slowing down or damaging the servers, one should definitely consider not sending more than one concurrent request, preferably with a timeout between each request. This is of course included in the provided implementation. It is also considerate to perform the fetching during non peak hours, such as in the night.\todo{sluta på en annan note}
+	%Det enda den här paragrafen säger är "Don't sue me" (snälla gör det inte)
+	Anyone who plans to implement this method should consider that the Novasoftware may get overloaded if it is receiving too many concurrent requests. In this case, the users activity will be inseparable from a DOS (Denial of Service) attack, which might cause damage to the servers or the business. This will also limit regular users ability to use the viewer as it may slow down or restrict the availability of the application. In order to minimize the risk of slowing down or damaging the servers, one should definitely consider not sending more than one concurrent request, preferably with a timeout between each request. This is of course included in the provided implementation. It is also considerate to perform the fetching during non peak hours, such as in the night, minimizing impact on Novasoftware servers.
 	
 	\newpage
 	\begin{appendices}
@@ -986,11 +987,7 @@
 			
 	\newpage
 	\renewcommand{\bibpreamble}{
-		\textit{All sources were reviewed at the date of publication of this paper. Because the information stated in the theory section of this paper (which is were the sources are referred from) is recognized as basic knowledge in the field, Wikipedia is considered a reliable source.}
-	}
-	\todo{
-		Behövs inte källor, Wikipedia är bara referens
-		typ av arete som inte gått ut på källforskning 	
+		\textit{Because this type of project does not rely on the use of sources as basis for claims, instead discussing empirical observations using technical terms and concepts, little emphasis is put on the sources. In order to provide a reference, where information can be validated and reviewed, Wikipedia is used; the articles listed include all the relevant information. All sources were reviewed at the date of publication of this paper.}
 	}
 	
 	\begin{thebibliography}{9}
