@@ -474,9 +474,9 @@
 	From the above figure one can see that the PDF lessons start further from the edges than the image. The misfit was assumed (which turned out to be correct) to be linear, meaning that the displacement was a linear function of the coordinates. This enabled the use of a simple linear transformation to correct for it, scaling and translating every x and y coordinate by a constant amount. If $P = (x, y)$ denotes the original position and $P' = (x', y')$ denotes the transformed and corrected result the equation for this process may be described in the following way.
 	
 	\begin{eqnarray}
-		P' &=& (s_x*x + t_x, s_y*y + t_y)\nonumber\\
-		\implies x' &=& s_x*x + t_x, \nonumber\\
-		y' &=& s_y*y + t_y \nonumber
+		P' &=& (s_x \cdot x + t_x, s_y \cdot y + t_y)\nonumber\\
+		\implies x' &=& s_x \cdot x + t_x, \nonumber\\
+		y' &=& s_y \cdot y + t_y \nonumber
 	\end{eqnarray}
 	
 	The width was also scaled with a constant $s_w$ because the ends did not match up perfectly.
@@ -490,7 +490,7 @@
 		\label{fig:pdf-image-match}
 	\end{figure}
 	
-	\textit{Please note that the included constants only work for PDFs displaying the schedule horizontally, as is the case for the majority of schedules I have encountered, including Värmdö Gymnasium but not for example the Stockholm high school Norra Real. Because the displacement in vertical schedules is also linear, the same method may be used using a new set of constants.}
+	\textit{Note that the included constants only work for PDFs displaying the schedule horizontally, as is the case for the majority of schedules I have encountered, including Värmdö Gymnasium but not for example the Stockholm high school Norra Real. Because the displacement in vertical schedules is also linear, the same method may be used using a new set of constants.}
 	
 	\subsection{Performing the click}
 	When performing the click the center coordinates were determined to give the best accuracy; reducing the risk of missing because of calculation error. These were calculated by averaging the corner coordinates.
@@ -501,7 +501,7 @@
 	The response of the final click request was the lesson detail page, provided as HTML. The relevant information was relatively easily found because they were contained in a table and could be obtained using standard HTML traversal methods.
 	
 	\subsection{Failing requests}
-	It was noticed that some requests, in a seemingly random pattern, failed (produced no response). In order to continue the process the requests had to be retried and performed again. This applied especially to the click requests. After examining this problem, the cause seemed to be performing too many request too fast and with too little space in between. In order to solve this, all requests were made in sequence and a timeout was performed before making the next request. In order to determine which timeout time was optimal in order to minimize the total time to parse schedules (which is especially important when parsing many schedules) experiments were made. These experiments were performed by completing the process using a certain timeout and measuring the total time elapsed. If the timeout time was too short certain request failed and had to be retried, taking a lot of time. On the other hand, if it was too long, time was wasted. The resulting value was 100 milliseconds. Please note that the optimal time may be dependent on the system or Internet connection and may therefor not be appropriate for every setup.
+	It was noticed that some requests, in a seemingly random pattern, failed (produced no response). In order to continue the process the requests had to be retried and performed again. This applied especially to the click requests. After examining this problem, the cause seemed to be performing too many request too fast and with too little space in between. In order to solve this, all requests were made in sequence and a timeout was performed before making the next request. In order to determine which timeout time was optimal in order to minimize the total time to parse schedules (which is especially important when parsing many schedules) experiments were made. These experiments were performed by completing the process using a certain timeout and measuring the total time elapsed. If the timeout time was too short certain request failed and had to be retried, taking a lot of time. On the other hand, if it was too long, time was wasted. The resulting value was 100 milliseconds. Note that the optimal time may be dependent on the system or Internet connection and may therefor not be appropriate for every setup.
 	%Bra skriven sektion. Speciellt 3.5 framåt hade bra språk och det är ju intressant på riktigt att läsa om hur alla problemen hanterades.
 	
 	\section{Results}
@@ -586,7 +586,7 @@
 		\item[$\bullet$] Not too small, area (width x height) $>$ 2
 	\end{description}
 	
-	Next the lesson fills must be transformed to match the image. Calculate the corrected x and y coordinates using the formulas $x' = s_x*x + t_x$ and $y' = s_y*y + t_y$. Next the center x and and y are determined by averaging the corner coordinates, while the day is determined by dividing the center x with the total width and multiplying by 5 (the amount of days in a school week). The result must be floored, i.e rounded down to the nearest integer. Now, 0 denotes Monday and 4 denotes Friday etc.
+	Next the lesson fills must be transformed to match the image. Calculate the corrected x and y coordinates using the formulas $x' = s_x \cdot x + t_x$ and $y' = s_y \cdot y + t_y$. Next the center x and and y are determined by averaging the corner coordinates, while the day is determined by dividing the center x with the total width and multiplying by 5 (the amount of days in a school week). The result must be floored, i.e rounded down to the nearest integer. Now, 0 denotes Monday and 4 denotes Friday etc.
 	
 	\subsubsection{Separating the texts}
 	It was discovered that the text positions does not perfectly match up with the lesson positions. To compensate for this, they must be offset slightly using the following formula $x' = x + t_{tx}$ and $y' = y + t_{ty}$ (see appendix \ref{constants}). Because the texts are too big to fit inside the lessons, set the width and height to $w_t$ and $h_t$. Next, in order to compare the text positions to the lessons, the above transformation must be applied to them also.
@@ -880,7 +880,7 @@
 	
 	\subsection{Considerations}
 	%Det enda den här paragrafen säger är "Don't sue me" (snälla gör det inte)
-	Anyone who plans to implement this method should consider that the Novasoftware may get overloaded if it is receiving too many concurrent requests. In this case, the users activity will be inseparable from a DOS (Denial of Service) attack, which might cause damage to the servers or the business. This will also limit regular users ability to use the viewer as it may slow down or restrict the availability of the application. In order to minimize the risk of slowing down or damaging the servers, one should definitely consider not sending more than one concurrent request, preferably with a timeout between each request. This is of course included in the provided implementation. It is also considerate to perform the fetching during non peak hours, such as in the night, minimizing impact on Novasoftware servers.
+	Anyone who plans to implement this process should consider that the Novasoftware may get overloaded if it is receiving too many concurrent requests. In this case, the users activity will be inseparable from a DOS (Denial of Service) attack, which might cause damage to the servers or the business. This will also limit regular users ability to use the viewer as it may slow down or restrict the availability of the application. In order to minimize the risk of slowing down or damaging the servers, one should definitely consider not sending more than one concurrent request, preferably with a timeout between each request. This is of course included in the provided implementation. It is also considerate to perform the fetching during non peak hours, such as in the night, minimizing impact on Novasoftware servers.
 	
 	\newpage
 	\begin{appendices}
